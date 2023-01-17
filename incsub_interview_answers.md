@@ -1,4 +1,4 @@
-AWS DYNAMODB 
+## AWS DYNAMODB 
 1. What is the difference between Query and Scan operations in DynamoDB?
 
 A Dynamodb query operation is used to retrieve one or more items from a table or a secondary index in the table. It allows for filtering the results based on the primary key or a secondary index key. It also allows for sorting the results in ascending or descending order WHILE
@@ -11,7 +11,7 @@ Projection expressions in DynamoDB are used to specify the attributes that shoul
 3.How would you make items in a DynamoDB table expire after a period of time?
 This can be achieved by setting future timestamp attributes, called Time to Live TTL for each item on the table. Dynamodb then automatically deletes items from table when their TTL values is less than the current time
 
-DOCKER
+## DOCKER
 4. How would we map ports in docker using cli command?
 One can map their local machine port to docker port using the syntax: docker run -p host_port:container_port e.g
 docker run -p 80:8080 my_image
@@ -19,7 +19,7 @@ docker run -p 80:8080 my_image
 5. What is the difference between docker stop and docker kill commands?
 The 'docker stop' command stop a running container and also performs cleanup actions before shutting down WHILE the 'docker kill' command abtruptly stops a running container and does not perform any cleanup actions
 
-AWS BATCH
+## AWS BATCH
 6.What are the states a job can have when submitted to an AWS Batch job queue?
 SUBMITTED: The job has been received by the queue and is waiting to be picked up by a compute environment.
 PENDING: The job has been picked up by a compute environment and is waiting for resources to become available.
@@ -38,7 +38,7 @@ AWS::Batch::ComputeEnvironment
 definition?
 To pass named arguments with parameterized values, you can use the command property of the containerProperties property and include the named arguments and their values in the command string
 
-AWS LAMBDA
+## AWS LAMBDA
 9.How can we tell at runtime whether or not a Batch job failed and has been
 attempted again?
 
@@ -51,13 +51,13 @@ This can be achieved by using Amazon CloudWatch Events to schedule regular excut
 have to wait for its results?
 
 One can excute a lambda function using the AWS SDK for python (Boto3). Below is syntax of how to invoke a lambda function using boto3
-
+```
 import boto3
-
-# Create a client for the Lambda service
+<!-- Create a client for the Lambda service -->
 client = boto3.client('lambda')
 
-# Invoke the Lambda function
+<!-- Invoke the Lambda function -->
+
 response = client.invoke(
     FunctionName='my_function',
     InvocationType='Event',
@@ -65,17 +65,18 @@ response = client.invoke(
 )
 # Print the response
 print(response)
+```
 One can decide to wait for the result or not depending on the InvocationType value. When InvocationType is set to 'Event', the function will excute asynchronously WHILE if it is set 'RequestResponse' the action will be performed synchronously and wait for response before it returns.
 
-PYTHON
+## PYTHON
 12. Given the following list, how would you produce a list with duplicate entries removed?
-list(set(['a','b','c','d','d','d','e','a','b','f','g','g','h']))
+`list(set(['a','b','c','d','d','d','e','a','b','f','g','g','h']))`
 
 13. Given the numbers in the following tuple sequence, how would we obtain a list of
 their squares?
 numbers = (1, 2, 3, 4, 5)
-
-# set into a list
+<!-- set into a list -->
+```
 def convert(set_args):
   num = list(set_args)
   f = lambda x: x*x
@@ -83,28 +84,30 @@ def convert(set_args):
 
 set_args = (1, 2, 3, 4, 5)
 print(convert(set_args))
-
+```
 14. Define a function is_palindrome that would return True if the input string is
 palindrome False
 
+```
 def is_palindrome(input_string):  
   new_string = ""
   reverse_string = ""
-  # Traverse through each letter of the input string
+  <!-- Traverse through each letter of the input string -->
   for string in input_string.lower():
    
     if string.replace(" ",""):
       new_string = string + new_string
       reverse_string = string + reverse_string
-  # Compare the strings
+  <!-- Compare the strings -->
   if new_string[::-1]==reverse_string:
     return True
   else:
     return False
+```
 
 15. Given the following data structure, print a list of pages that have GET as their type
 and 403 as their status
-
+```
 requestList = [
 {
 "type": "GET",
@@ -152,3 +155,5 @@ for request in requestList:
   if request["type"] == "GET" and request["status"] == 403:
     newList.append(request)
 print(newList)
+
+```
